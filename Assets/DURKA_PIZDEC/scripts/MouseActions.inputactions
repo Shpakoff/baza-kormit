@@ -1,0 +1,34 @@
+{
+    "name": "MouseActions",
+    "maps": [
+        {
+            "name": "ActionMap",
+            "id": "b76233e2-5d2d-44bb-a6ce-1217fe0217f2",
+            "actions": [
+                {
+                    "name": "LMB",
+                    "type": "PassThrough",
+                    "id": "28f17fa8-8246-4430-beb7-577117e67ea3",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "6f542e63-81f9-418a-bb72-f78289401a44",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "",
+                    "action": "LMB",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}
