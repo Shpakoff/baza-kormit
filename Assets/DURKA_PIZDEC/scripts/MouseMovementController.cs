@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
@@ -14,8 +15,6 @@ public class MouseMovementController : MonoBehaviour
     private MouseActions actions;
 
     [SerializeField] private float speed = 1.4f;
-
-    private Vector3? targetPosition;
 
     private Vector3Int? previousFinishPosition;
     private ModalEventBus modalEventBus = ModalEventBus.Instance;
@@ -44,11 +43,6 @@ public class MouseMovementController : MonoBehaviour
         };
     }
 
-    void Update()
-    {
-        MoveToTargetPosition();
-    }
-
     Vector3 GetMousePosition()
     {
         Vector3 mouseScreenPosition = new Vector3(
@@ -69,26 +63,13 @@ public class MouseMovementController : MonoBehaviour
         previousFinishPosition = finishPosition;
     }
 
-    void SetTargetPosition(Vector3 position)
-    {
-        Vector3 cellCenterPosition = tileGrid.GetCellCenterWorld(GetGridCellPosition(position));
-        targetPosition = cellCenterPosition;
-    }
-
-    void MoveToTargetPosition()
-    {
-        if (targetPosition == null) return;
-        Vector3 position = Vector3.Lerp(transform.position, (Vector3)targetPosition, Time.deltaTime * speed);
-        transform.position = position;
-        if (transform.position.Equals(targetPosition)) targetPosition = null;
-    }
-
     void Move(Vector3 position)
     {
         if (CanMove(position))
         {
             HighlightFinishPosition(GetGridCellPosition(position));
-            SetTargetPosition(position);
+            Vector3 cellCenterPosition = tileGrid.GetCellCenterWorld(GetGridCellPosition(position));
+            transform.DOMove(cellCenterPosition, 10 / speed);
         }
         else
         {
